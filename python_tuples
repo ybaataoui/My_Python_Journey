@@ -1,0 +1,9 @@
+# Tuples are of type immutable that means they can't be chnages once the data set.
+my_tuple = (1, 'strings', 4.5, True) # you cna declare a tuple without () but preferebly using ()
+print(type(my_tuple[1]))
+
+print(my_tuple.count('strings')) #return the item index in the tuple.
+print(my_tuple.index(4.5)) #same as above but return only one value.
+
+for x in my_tuple:
+    print(x)
