@@ -1,0 +1,16 @@
+I disagree somewhat with several of the opinions expressed here, that print >> f is redundant and should be avoided in favour of f.write.
+
+print and file.write are quite different operations. file.write just directly writes a string to a file. print is more like "render values to stdout as text". 
+Naturally, the result of rendering a string as text is just the string, so print >> f, my_string and f.write(my_string) are nearly interchangeable 
+(except for the addition of a newline). But your choice between file.write and print should normally be based on what you're doing; are you writing a string to a file, 
+or are you rendering values to a file?
+
+Sure, print is not strictly necessary, in that you can implement it with file.write. But then file.write is not strictly necessary, because you can implement it with the 
+operations in os for dealing with file descriptors. Really they're operations on different levels, and you should use whichever is more most appropriate for your use 
+(normally the level other nearby code is working on, or the highest level that doesn't get in your way).
+
+I do feel that the print >> f syntax is fairly horrible, and is a really good example of why print should have been a function all along. 
+This is much improved in Python 3. But even if you're writing Python 2 code that you're planning to port to Python 3, it is much easier to convert print >> 
+f, thing1, thing2, thing3, ... to print(thing1, thing2, thing3, file=f) than it is to convert the circumlocution where you roll your own code to do the equivalent 
+of print's rendering and then call f.write(text). I'm pretty sure the semi-automatic converter from Python 2 to Python 3 will even do the conversion for you, which it 
+couldn't possibly do if you avoid the print >> f form.
