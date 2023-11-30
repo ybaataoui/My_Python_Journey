@@ -24,3 +24,4 @@ print(list1, sep = " ")
 
 del list1[2]
 print(list1, sep = " ")
+

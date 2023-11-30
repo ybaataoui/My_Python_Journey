@@ -1,16 +1,30 @@
-I disagree somewhat with several of the opinions expressed here, that print >> f is redundant and should be avoided in favour of f.write.
+Types of test:
+Unit
+In unit or component testing, the program tests specific individual components by isolating them. 
+The components are low level which means that they are closer to the actual written code. 
+They often involve use of automation for continuous integration given their small sizes. So you usually write these tests while writing the code.
 
-print and file.write are quite different operations. file.write just directly writes a string to a file. print is more like "render values to stdout as text". 
-Naturally, the result of rendering a string as text is just the string, so print >> f, my_string and f.write(my_string) are nearly interchangeable 
-(except for the addition of a newline). But your choice between file.write and print should normally be based on what you're doing; are you writing a string to a file, 
-or are you rendering values to a file?
 
-Sure, print is not strictly necessary, in that you can implement it with file.write. But then file.write is not strictly necessary, because you can implement it with the 
-operations in os for dealing with file descriptors. Really they're operations on different levels, and you should use whichever is more most appropriate for your use 
-(normally the level other nearby code is working on, or the highest level that doesn't get in your way).
+Integration
+integration testing, combines the unit tests and test the flow of data from one component to another. The key word here is an interface. 
+This means that you test if the data is correctly fetched from a database within the python code, and if you have sent it to the web page. 
+There are different approaches to it such as top down, bottom up and sandwich approaches. 
+Your approach depends on what code level interfaces you attempt first. It builds on the unit testing and a tester deals with it.
 
-I do feel that the print >> f syntax is fairly horrible, and is a really good example of why print should have been a function all along. 
-This is much improved in Python 3. But even if you're writing Python 2 code that you're planning to port to Python 3, it is much easier to convert print >> 
-f, thing1, thing2, thing3, ... to print(thing1, thing2, thing3, file=f) than it is to convert the circumlocution where you roll your own code to do the equivalent 
-of print's rendering and then call f.write(text). I'm pretty sure the semi-automatic converter from Python 2 to Python 3 will even do the conversion for you, which it 
-couldn't possibly do if you avoid the print >> f form.
+System 
+system testing, which tests all the software you tested against the set requirements and expectations to ensure completeness. 
+This includes measurements of the location of deployed components such as reliability, performance, security and load balancing. 
+It also measures operability in the working environment such as the platform and the operating system. 
+This is the most important stage handled by team of testers. 
+It's also the most critical stage as the shipping of software to the stakeholders and end user happened after this phase.
+
+
+Acceptance testing
+acceptance testing. When the product arrives at this stage, it's generally considered to be ready for deployment. 
+It's expected to be bug free and meet the set standards. The stakeholders and the select few end users are involved in acceptance testing.
+
+
+white box testing
+black box testing
+
+Pytest and native Python library that is simple, easy to use, and reasonably scalable.
